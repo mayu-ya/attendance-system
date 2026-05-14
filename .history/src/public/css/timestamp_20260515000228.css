@@ -1,0 +1,43 @@
+.content {
+    height: 100vh;
+    background: whitesmoke;
+}
+
+.content-item {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.status {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    text-align: center;
+    
+}
+
+.status-p {
+    width: 30%;
+    background: lightgray;
+    border-radius: 50px;
+    margin: 0 auto;
+    padding: 5px 10px;
+    color: dimgrey;
+}
+
+.date {
+    text-align: center;
+}
+
+.form {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.button-b {
+    font-size: 30px;
+    background: black;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}

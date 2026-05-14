@@ -1,0 +1,42 @@
+@extends('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/timestamp.css') }}">
+@endsection
+
+@section('content')
+<div class="content">
+    <div class="content-item">
+        <div class="status">
+            <p class="status-p">勤務外</p>
+            <p class="status-p">勤務中</p>
+            <p class="status-p">休憩中</p>
+            <p class="status-p">退勤済</p>
+        </div>
+
+        <div class="date">日付</div>
+
+        <form action="" class="form">
+            @csrf
+            <button class="button-b">出勤</button>
+        </form>
+
+        <div class="form__group">
+            <form action="" class="form">
+                @csrf
+                <button class="button-b">退勤</button>
+            </form>
+            <form action="" class="form">
+                @csrf
+                <button class="button-w">休憩入</button>
+            </form>
+        </div>
+        
+        <form action="" class="form">
+            @csrf
+            <button class="button-w">休憩戻</button>
+        </form>
+
+    </div>
+</div>
+@endsection

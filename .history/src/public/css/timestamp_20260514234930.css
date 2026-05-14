@@ -1,0 +1,24 @@
+.content {
+    height: 100vh;
+    background: whitesmoke;
+    margin-top: 0;
+}
+
+.content-item {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.status-p {
+    background: lightgray;
+    border-radius: 50px;
+    padding: 5px 10px;
+    color: dimgrey;
+}
+
+.button-b {
+    font-size: 35px;
+    background: black;
+    color: white;
+    padding: 10px 20px;
+}

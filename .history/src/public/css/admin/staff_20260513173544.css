@@ -1,0 +1,53 @@
+.content {
+    height: 100vh;
+    background: whitesmoke;
+    
+}
+
+.content-item {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.title {
+    padding-top: 60px;
+}
+
+.title-item {
+    padding: 5px;
+    border-left: 10px solid #000; 
+    margin-top: 0;
+}
+
+.form {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.table {
+    display: flex;
+    background: white;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.table__inner {
+    border-bottom: 2px solid whitesmoke;
+    width: 100%;
+    text-align: center;
+}
+
+.table-input {
+    width: 100px;
+}
+
+.table-input__email {
+    width: 150px;
+}
+
+.button__submit {
+    font-weight: bold;
+    background: white;
+    border: none;
+    cursor: pointer;
+}

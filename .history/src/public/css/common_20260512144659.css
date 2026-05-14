@@ -1,0 +1,18 @@
+.header {
+    background: black;
+}
+
+.header-nav {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+.header-nav__link {
+    color: white;
+}
+
+.header-nav__button {
+    border: none;
+    color: white;
+}

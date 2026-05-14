@@ -1,0 +1,27 @@
+.content {
+    margin: 0 auto;
+    background: whitesmoke;
+}
+
+.login-title-h {
+    text-align: center;
+}
+
+.form {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.form__error {
+    color: red;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.form-button__submit {
+    background: black;
+    color: white;
+    width: 100%;
+}

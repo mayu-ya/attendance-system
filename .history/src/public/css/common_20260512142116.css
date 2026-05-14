@@ -1,0 +1,12 @@
+.header {
+    background: black;
+}
+
+.header-nav__link {
+    color: white;
+}
+
+.header-nav__button {
+    border: none;
+    color: white;
+}

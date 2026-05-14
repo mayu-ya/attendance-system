@@ -1,0 +1,10 @@
+.content {
+    height: 100vh;
+    background: whitesmoke;
+    
+}
+
+.content-item {
+    margin: 0 auto;
+    width: 50%;
+}
