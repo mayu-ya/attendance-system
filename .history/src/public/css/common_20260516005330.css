@@ -1,0 +1,35 @@
+.header {
+    background: black;
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    margin-top: 7px;
+}
+
+.header__inner {
+    width: 30%;
+}
+
+.header__logo {
+    width: 100%;
+}
+
+.header-nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 7px;
+}
+
+.header-nav__link {
+    text-decoration: none;
+    color: white;
+    padding-right: 5px;
+}
+
+.header-nav__button {
+    border: none;
+    background: black;
+    color: white;
+}

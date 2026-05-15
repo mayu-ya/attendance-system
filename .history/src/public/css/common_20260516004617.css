@@ -1,0 +1,32 @@
+.header {
+    background: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__inner {
+    width: 30%;
+}
+
+.header__logo {
+    width: 100%;
+}
+
+.header-nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.header-nav__link {
+    text-decoration: none;
+    color: white;
+}
+
+.header-nav__button {
+    border: none;
+    background: black;
+    color: white;
+}
