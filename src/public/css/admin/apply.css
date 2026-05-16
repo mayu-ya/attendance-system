@@ -40,7 +40,7 @@
     text-decoration: none;
 }
 
-.form {
+.item {
     width: 100%;
     margin-top: 40px;
 }
@@ -65,9 +65,8 @@
     width: 100px;
 }
 
-.button__submit {
-    background: white;
-    border: none;
+.link-a {
     font-weight: bold;
-    cursor: pointer;
+    text-decoration: none;
+    color: #000;
 }

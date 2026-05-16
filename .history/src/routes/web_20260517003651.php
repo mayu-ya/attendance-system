@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WorkingController;
+use App\Http\Controllers\AdminWorkingController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', [WorkingController::class, 'index']);
+});
+
+Route::get('/attendance/list', [WorkingController::class, 'attendance'])->name('attendance.index')
+Route::get('/attendance/detail/', [WorkingController::class, 'detail'])->name('detail.index');
+Route::get('/attendance', [WorkingController::class, 'apply']);
+
+Route::get('/admin/attendance/list', [AdminWorkingController::class, 'index'])->name('admin_attendance.index');
+Route::get('/admin/attendance/', [AdminWorkingController::class, 'detail'])->name('admin_detail.index');
+Route::get('/admin/staff/list', [AdminWorkingController::class, 'staff'])->name('admin_staff.index');
+Route::get('/admin/attendance/staff/', [AdminWorkingController::class, 'person'])->name('person.index');
+Route::get('/stamp_correction_request/list', [AdminWorkingController::class, 'apply'])->name('admin_apply.index');
+Route::get('/stamp_correction_request/approve/', [AdminWorkingController::class, 'approval'])->name('approval.index');
