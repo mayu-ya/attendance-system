@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\BreakTime;
 
-class Attendances_Record extends Model
+class AttendanceRecord extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'date',
         'start_time',
         'end_time',
@@ -20,7 +21,7 @@ class Attendances_Record extends Model
     ];
 
     protected $guarded = [
-        'user_id'
+        
     ];
 
     public function user(){
@@ -28,7 +29,10 @@ class Attendances_Record extends Model
     }
 
     public function breaks(){
-        return $this->hasMany('BreakTime');
+        return $this->hasMany(BreakTime::class);
     }
 
+    public function attendance_records(){
+        return $this->hasMany('Attendance_record');
+    }
 }
