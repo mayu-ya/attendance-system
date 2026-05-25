@@ -20,6 +20,6 @@ class BreakTime extends Model
     protected $table = 'breaks';
 
     public function attendance_record(){
-        return $this->belongsTo('Attendance_Record');
+        return $this->belongsTo(Attendance_Record::class);
     }
 }
