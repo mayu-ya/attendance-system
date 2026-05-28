@@ -1,0 +1,107 @@
+.content {
+    height: 100vh;
+    background: whitesmoke;
+    
+}
+
+.content-item {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.title {
+    padding-top: 60px;
+}
+
+.title-item {
+    padding: 5px 0 5px 15px;
+    border-left: 10px solid #000; 
+    margin-top: 0;
+}
+
+.form {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.table {
+    background: white;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.table__inner {
+    border-bottom: 2px solid whitesmoke;
+}
+
+.table-title {
+    padding: 15px;
+    width: 30%;
+}
+
+.table-content {
+    padding: 15px;
+    width: 70%;
+    text-align: center;
+}
+
+.table-item__name {
+    font-weight: bold;
+    width: 250px;
+    height: 30px;
+    border: none;
+}
+
+.input-date {
+    display: flex;
+    margin-left: 75px;
+}
+
+.table-item__date {
+    font-weight: bold;
+    width: 80px;
+    height: 30px;
+    margin-left: 50px;
+    border: none;
+}
+
+.table-item {
+    font-weight: bold;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+}
+
+.table-textarea {
+    font-weight: bold;
+    width: 250px;
+    height: 50px;
+}
+
+.table-span {
+    margin: 0 35px;
+}
+
+.button {
+    margin-top: 25px;
+    text-align: right;
+}
+
+.button__submit {
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 20px;
+    padding: 5px 30px;
+    cursor: pointer;
+}
+
+.update {
+    margin-top: 25px;
+    text-align: right;
+}
+
+.update-p {
+    color: red;
+}
