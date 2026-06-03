@@ -21,7 +21,7 @@
 
 .form {
     width: 100%;
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .table {
@@ -45,39 +45,76 @@
     text-align: center;
 }
 
+.table-content_date {
+    display: flex;
+    padding: 15px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .table-item__name {
     width: 250px;
     height: 30px;
+    font-weight: bold;
+    font-size: 15px;
     border: none;
 }
 
 .table-item__date {
-    width: 250px;
+    width: 100px;
     height: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
     border: none;
 }
 
 .table-item {
     width: 80px;
     height: 30px;
-    
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
 }
 
 .table-textarea {
     width: 250px;
     height: 50px;
-
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
 }
 
 .table-span {
     margin: 0 35px;
 }
 
-.update {
+.button {
     margin-top: 25px;
     text-align: right;
 }
 
-.update-p {
-    color: red;
+.button__submit {
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 20px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button__submit-but {
+    background: darkgray;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 20px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
 }
