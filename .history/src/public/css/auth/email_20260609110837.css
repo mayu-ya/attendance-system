@@ -1,0 +1,33 @@
+.content {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 150px;
+    text-align: center;
+}
+
+.content-h {
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-form {
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    margin-top: 40px;
+    font-size: 20px;
+    border-radius: 3px;
+    border-color: darkgray;
+    background: gainsboro;
+}
+
+.button-email {
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: white;
+    color: blue;
+    font-size: 15px;
+    margin-top: 20px;
+}
