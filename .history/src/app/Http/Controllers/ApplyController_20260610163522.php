@@ -1,0 +1,189 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\AttendanceRecord;
+use App\Models\BreakTime;
+use \Carbon\Carbon;
+use App\Models\Apply;
+use App\Models\Rest;
+use App\Http\Requests\TimeRequest;
+
+class ApplyController extends Controller
+{
+    public function detail($id)
+    {
+        $userId = Auth::user()->id;
+        $apply = Apply::where('user_id', $userId)->where('attendance_record_id', $id)->first();
+        $work = AttendanceRecord::with('user')->where('id', $id)->first();
+
+        if($apply){
+            $breaks = Rest::where('apply_id', $apply->id)->get();
+
+            return view('detail', compact('work', 'apply', 'breaks'));
+        }
+
+        $breaks = BreakTime::where('attendance_record_id', $id)->get();
+
+        return view('detail', compact('work', 'apply', 'breaks'));
+    }
+
+    public function request(TimeRequest $request, $id)
+    {
+        $item = $request->except('breaks', 'rest');
+        $breaks = $request->input('breaks');
+        $work = AttendanceRecord::find($id);
+
+        $apply = Apply::updateOrCreate(
+            ['attendance_record_id' => $work->id],
+            ['user_id' => Auth::user()->id,
+            'attendance_record_id' => $id,
+            'date' => $work->date,
+            'start_time' => Carbon::parse($item['start_time']),
+            'end_time' => Carbon::parse($item['end_time']),
+            'work_total' => ,
+            'duration' => ,
+            'content' => $item['content'],
+            'status' => 'pending'
+        ]);
+
+        $rests = collect();
+
+        if($breaks){
+        foreach($breaks as $break)
+        {
+            if (empty($break['rest_start']) || empty($break['rest_end'])) {
+            continue; 
+            }
+
+            $restStart = Carbon::parse($break['rest_start']);
+            $restEnd = Carbon::parse($break['rest_end']);
+            $total = $restStart->diffInMinutes($restEnd);
+
+            $startTimeString = $restStart->format('H:i:s');
+            $endTimeString = $restEnd->format('H:i:s');
+
+            $rest = Rest::updateOrCreate(
+                [
+                    'apply_id' => $apply->id,
+                    'rest_start' => $startTimeString
+                ],
+                [
+                'apply_id' => $apply->id,
+                'rest_start' => $startTimeString,
+                'rest_end' => $endTimeString,
+                'rest_total' => $total
+            ]);
+            $rests->push($rest);
+        }
+        }
+
+        if($request->input('rest')){
+            $breakDate = $request->input('rest');
+
+            if (!empty($breakDate['rest_start']) && !empty($breakDate['rest_end'])) {
+                $breakStart = Carbon::parse($breakDate['rest_start']);
+                $breakEnd = Carbon::parse($breakDate['rest_end']);
+                $totalDate = $breakStart->diffInMinutes($breakEnd);
+
+                Rest::updateOrCreate(
+                    [
+                        'id' => $breakDate['id'] ?? null,
+                        'apply_id' => $apply->id
+                    ],
+                    ['apply_id' => $apply->id,
+                    'rest_start' => $breakStart->format('H:i:s'),
+                    'rest_end' => $breakEnd->format('H:i:s'),
+                    'rest_total' => $totalDate
+                ]);
+            }
+        }
+
+        //$workId = $request->input('attendance_record_id');
+
+        $restTime = Rest::where('apply_id', $apply->id)->get()->sum('rest_total');
+        $totalBreakTime = sprintf('%02d:%02d:00', floor($restTime / 60), $restTime % 60);
+
+        $record = Apply::find($apply->id);
+        $start = Carbon::parse($apply->start_time);
+        $end = Carbon::parse($apply->end_time);
+        $totalToday = $start->diffInMinutes($end);
+        $totalWork = $totalToday-$restTime;
+        $totalTime = sprintf('%02d:%02d:00', floor($totalWork / 60), $totalWork % 60);
+
+        $work->update([
+            'work_total' => $totalTime,
+            'duration' => $totalBreakTime,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function mix_apply(Request $request)
+    {
+        if(Auth::guard('admin')->check()){
+            return $this->index($request);
+        }
+
+        return $this->apply($request);
+    }
+
+    public function apply(Request $request)
+    {
+        $action = $request->input('action');
+        $userId = Auth::user()->id;
+
+        if($action === 'wait')
+        {
+            $applies = Apply::with('rests', 'user')->where('user_id', $userId)->where('status', 'pending')->get();
+        
+            foreach($applies as $apply){
+                $apply->date = Carbon::parse($apply->date)->format('Y/m/d');
+                $apply->updated_at_formatted = Carbon::parse($apply->updated_at)->format('Y/m/d');
+            }
+
+            return view('apply_wait', compact('applies'));
+        }
+        elseif($action === 'apply')
+        {
+            $applies = Apply::with('rests', 'user')->where('user_id', $userId)->where('status', 'approved')->get();
+
+            foreach($applies as $apply){
+                $apply->date = Carbon::parse($apply->date)->format('Y/m/d');
+                $apply->updated_at_formatted = Carbon::parse($apply->updated_at)->format('Y/m/d');
+            }
+
+            return view('apply', compact('applies'));
+        }
+    }
+
+    public function index(Request $request)
+    {
+        $action = $request->input('action');
+
+        if($action === 'wait')
+        {
+            $applies = Apply::with('rests', 'user')->where('status', 'pending')->get();
+        
+            foreach($applies as $apply){
+                $apply->date = Carbon::parse($apply->date)->format('Y/m/d');
+                $apply->updated_at_formatted = Carbon::parse($apply->updated_at)->format('Y/m/d');
+            }
+
+            return view('admin.apply_wait', compact('applies'));
+        }
+        elseif($action === 'apply')
+        {
+            $applies = Apply::with('rests', 'user')->where('status', 'approved')->get();
+
+            foreach($applies as $apply){
+                $apply->date = Carbon::parse($apply->date)->format('Y/m/d');
+                $apply->updated_at_formatted = Carbon::parse($apply->updated_at)->format('Y/m/d');
+            }
+
+            return view('admin.apply', compact('applies'));
+        }
+    }
+}
