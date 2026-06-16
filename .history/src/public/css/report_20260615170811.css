@@ -1,0 +1,57 @@
+.content {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.font {
+    font-weight: bold;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-item {
+    background: whitesmoke;
+}
+
+.summary-p {
+    color: darkgray;
+}
+
+.summary-time {
+    font-weight: bold;
+}
+
+.table {
+    width: 100%;
+}
+
+.table__inner {
+    border-bottom: 2px solid whitesmoke;
+}
+
+.font-p {
+    color: darkgray;
+}
+
+.count {
+    display: flex;
+    justify-content: space-between;
+}
+
+.time-count {
+    background: whitesmoke;
+    border: darkgray;
+    padding-left: 10px;
+    width: 32%;
+}
+
+.count-p {
+    color: darkgray
+}
+
+.count-div {
+    font-weight: bold;
+}

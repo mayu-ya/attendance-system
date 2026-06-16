@@ -1,0 +1,45 @@
+.content {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.font {
+    font-weight: bold;
+}
+
+.summary {
+    display: flex;
+}
+
+.summary-item {
+    background: whitesmoke;
+}
+
+.summary-p {
+    color: darkgray;
+}
+
+.summary-time {
+    font-weight: bold;
+}
+
+.table__inner {
+    border-bottom: 2px solid whitesmoke;
+}
+
+.font-p {
+    color: darkgray;
+}
+
+.time-count {
+    background: whitesmoke;
+    border: darkgray;
+}
+
+.count-p {
+    color: darkgray
+}
+
+.count-div {
+    font-weight: bold;
+}
