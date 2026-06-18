@@ -10,6 +10,7 @@ use Database\Seeders\DatabaseSeeder;
 use App\Models\User;
 use App\Models\AttendanceRecord;
 use App\Models\BreakTime;
+use App\Models\Report;
 use \Carbon\Carbon;
 
 class ReportTest extends TestCase
@@ -32,12 +33,12 @@ class ReportTest extends TestCase
     public function test_report()
     {
         $user = User::find(1);
-        //$user->update(['email_verified_at' => now(),]);
-        //dd($user);
+        $user->update(['email_verified_at' => now(),]);
+        $user->save();
 
         AttendanceRecord::create([
             'user_id' => $user->id,
-            'date' => Carbon::now()->subDay()->isoFormat('YYYY/MM/DD/'),
+            'date' => Carbon::now()->subDay()->isoFormat('YYYY/MM/DD'),
             'start_time' => '9:00',
             'end_time' => '18:00',
             'work_total' => '8:00',
@@ -45,24 +46,44 @@ class ReportTest extends TestCase
         ]);
         $attendance = AttendanceRecord::create([
             'user_id' => $user->id,
-            'date' => Carbon::now()->isoFormat('YYYY/MM/DD/'),
+            'date' => Carbon::now()->isoFormat('YYYY/MM/DD'),
             'start_time' => '9:00',
-            'end_time' => '17:00',
-            'work_total' => '7:00',
+            'end_time' => '',
+            'work_total' => '',
             'duration' => '1:00',
+        ]);
+        $report = Report::create([
+            'user_id' => $user->id,
+            'month' => Carbon::now()->format('Y-m'),
+            'total_work' => 0,
+            'total_overtime' => 0,
+            'average_work' => 0,
         ]);
         $response = $this->actingAs($user)->from('/attendance')->post('/working/end', [
             'attendance_record_id' => $attendance->id,
         ]);
 
-        $response = $this->actingAs($user)->get('/attendance/report')->assertStatus(200);
-        //$response->assertSee();
+        $totalTime = sprintf('%01dh%01dm', floor($report->total_work / 60), $report->total_work % 60);
+        $totalOverTime = sprintf('%01dh%01dm', floor($report->total_overtime / 60), $report->total_overtime % 60);
+        $averageWork = sprintf('%01dh%01dm', floor($report->average_work / 60), $report->average_work % 60);
+
+        $response = $this->get('/attendance/report')->assertStatus(200);
+        $response->assertSee($totalTime);
+        $response->assertSee($totalOverTime);
+        $response->assertSee($averageWork);
     }
 
     public function test_report_user()
     {
         $user = User::find(3);
-        $user->create(['email_verified_at' => now(),]);
+        $user->update(['email_verified_at' => now(),]);
+        $user->save();
+        Report::create([
+            'user_id' => $user->id,
+            'month' => Carbon::now()->format('Y-m'),
+            'total_work' => 0,
+            'average_work' => 0,
+        ]);
 
         $response = $this->actingAs($user)->get('/attendance/report')->assertStatus(200);
         $response->assertSee('0h0m');

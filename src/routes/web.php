@@ -47,7 +47,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/break/end', [WorkingController::class, 'break__end']);
     Route::match(['get', 'post'], '/attendance/list', [WorkingController::class, 'attendance'])->name('attendance.index');
 
-    Route::get('/attendance/report', [ReportController::class, 'export']);
+    Route::get('/attendance/report', [ReportController::class, 'report']);
 
     Route::get('/attendance/detail/{id}', [ApplyController::class, 'detail'])->name('detail.index');
     Route::post('/attendance/request/{id}', [ApplyController::class, 'request'])->name('detail.update');

@@ -9,7 +9,7 @@ use \Carbon\Carbon;
 
 class ReportController extends Controller
 {
-    public function export()
+    public function report()
     {
         $userId = Auth::id();
         $month = Carbon::now();
