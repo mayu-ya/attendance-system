@@ -11,7 +11,7 @@
             <h2 class="title-item">勤怠詳細</h2>
         </div>
 
-        @if($apply)
+        @if(!$work)
         <form action="" class="form" method="post">
         @elseif($work)
         <form action="{{ route('detail.update', ['id'=>$work->id]) }}" class="form" method="post">
@@ -21,7 +21,7 @@
                 <tr class="table__inner">
                     <th class="table-title">名前</th>
                     <td class="table-content">
-                        @if($apply)
+                        @if(!$work)
                         <input type="text" class="table-item__name" value="{{ $apply->user->name }}" readonly>
                         @elseif($work)
                         <input type="text" class="table-item__name" value="{{ $work->user->name }}" readonly>
@@ -32,7 +32,7 @@
                     <th class="table-title">日付</th>
                     <td class="table-content">
                         <div class="input-date">
-                            @if($apply)
+                            @if(!$work)
                             <input type="text" name="date" class="table-item__date" value="{{ \Carbon\Carbon::parse($apply['date'])->isoFormat('YYYY年') }}" readonly>
                             <input type="text" name="date" class="table-item__date" value="{{ \Carbon\Carbon::parse($apply['date'])->isoFormat('MM月DD日') }}" readonly>
                             @elseif($work)
@@ -50,7 +50,7 @@
                             {{ $message }}
                             @enderror
                         </div>
-                        @if($apply)
+                        @if(!$work)
                         <input type="text" name="start_time" class="table-item-list" value="{{ substr($apply->start_time, 0, 5) ?? '' }}" readonly><span class="table-span">～</span>
                         <input type="text" name="end_time" class="table-item-list" value="{{ substr($apply->end_time, 0, 5) ?? '' }}" readonly>
                         @elseif($work)
@@ -59,7 +59,7 @@
                         @endif
                     </td>
                 </tr>
-                @if($apply)
+                @if(!$work)
                 @foreach($apply->rests as $rest)
                 <tr class="table__inner">
                     <th class="table-title">
@@ -103,7 +103,7 @@
                 @endforeach
                 <tr class="table__inner">
                     <th class="table-title">
-                        @if($apply)
+                        @if(!$work)
                             @if($apply->rests === 0)
                                 休憩
                             @else
@@ -141,7 +141,7 @@
                             {{ $message }}
                             @enderror
                         </div>
-                        @if($apply)
+                        @if(!$work)
                         <textarea class="table-textarea-list" name="content" readonly>{{ $apply->content }}</textarea>
                         @elseif($work)
                         <textarea class="table-textarea" name="content">{{ old('content') }}</textarea>
@@ -150,7 +150,7 @@
                 </tr>
             </table>
             <div class="button">
-                @if($apply)
+                @if(!$work)
                 <p class="update-p">*承認待ちのため修正はできません。</p>
                 @elseif($work)
                 <button class="button__submit" type="submit">修正</button>

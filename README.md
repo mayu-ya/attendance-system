@@ -20,11 +20,12 @@ composer install
 cp .env.example .env
 ```
 ```
-#Your lock file does not contain a compatible set of packages. Please run composer update.とエラーが出たときは以下を実行する。
+# もし、Your lock file does not contain a compatible set of packages. Please run composer update.とエラーが出たときは以下を実行する。
 composer update laravel-lang/lang --no-plugins
 ```
-``` .env
-#この箇所を変更(11~16行目付近)
+```
+# .env
+# この箇所を変更(11~16行目付近)
 DB_CONNECTION = mysql
 DB_HOST = mysql
 DB_PORT = 3306
@@ -32,7 +33,7 @@ DB_DATABASE = laravel_db
 DB_USERNAME = laravel_user
 DB_PASSWORD = laravel_pass
 
-#パーミッションエラーで変更できない場合は、コンテナを抜けて以下を実行する
+# パーミッションエラーで変更できない場合は、コンテナを抜けて以下を実行する
 sudo chmod -R 777 src/.env
 ```
 ```
@@ -44,7 +45,8 @@ php artisan db:seed
 ```
 
 ## mailhogセットアップ
-``` .env
+```
+# .env
 # 以下の箇所を修正する(31~38行目付近)
 MAIL_MAILER=smtp
 MAIL_HOST=mailhog
@@ -92,7 +94,7 @@ MAIL_FROM_NAME="${APP_NAME}"
   - created_at
   - updated_at
 
-- applies_table  ->申請承認用
+- applies_table  ->申請承認用勤怠
   - id
   - user_id
   - admin_id    ->誰が承認したのか
@@ -103,11 +105,11 @@ MAIL_FROM_NAME="${APP_NAME}"
   - work_total  ->1日の労働時間（休憩時間除く）
   - duration    ->1日の休憩時間合計
   - content     ->備考欄の内容
-  - status      ->'pending : 承認待ち','approved : 承認済み'のいずれかを保存
+  - status      ->'pending : 承認待ち', 'approved : 承認済み'のいずれかを保存
   - created_at
   - updated_at
 
-- rests_table  ->申請承認用
+- rests_table  ->申請承認用休憩
   - id
   - attendance_record_id
   - rest_start  ->休憩開始時間
@@ -131,4 +133,4 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ## 留意点
 - 画面設計のスタッフ側のヘッダーのnavタグは、「勤怠　勤怠一覧　申請　レポート　ログアウト」と統一している。「今月の勤怠一覧　申請一覧」は不採用にしてある。このことはコーチに確認済みである。
-- 卒業日までに提出するため、その期限内にはAPIを実装する期間が足りなかったので、APIは未実装です。採点お願いします。
+- 卒業日までに提出するため、その期限内には学習及びAPIを実装する期間が足りなかったので、APIは未実装です。採点お願いします。

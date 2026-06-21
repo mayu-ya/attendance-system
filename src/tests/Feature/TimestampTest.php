@@ -182,10 +182,12 @@ class TimestampTest extends TestCase
 
         $this->from('/attendamce')->post('/break/start', [
             'attendance_record_id' => $attendance->id,
+            'rest_start' => Carbon::now()->format('H:i'),
         ]);
 
         $this->from('/attendamce')->post('/break/end', [
             'attendance_record_id' => $attendance->id,
+            'rest_end' => Carbon::now()->format('H:i'),
         ]);
 
         $break = BreakTime::where('attendance_record_id', $attendance->id)->first();

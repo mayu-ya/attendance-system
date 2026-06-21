@@ -20,13 +20,14 @@ class ApplyController extends Controller
         if(!$apply){
             $work = AttendanceRecord::with('user', 'breaks')->find($id);
 
-            return view('detail', compact('work', 'apply'));
+            return view('detail', compact('work'));
         }
 
         if($apply){
             $apply = Apply::with('user', 'rests')->where('user_id', $userId)->find($id);
+            $work = null;
 
-            return view('detail', compact('apply'));
+            return view('detail', compact('apply', 'work'));
         } 
     }
 

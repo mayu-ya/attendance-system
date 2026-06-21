@@ -109,10 +109,7 @@ class WorkingController extends Controller
         $thisMonth = AttendanceRecord::where('user_id', Auth::id())
                                     ->whereBetween('date', [$startMonth->toDateString(), $endMonth->toDateString()])
                                     ->count();
-        //dd($thisMonth);
         $averageTime = round($workTotal/$thisMonth);
-        //dd($totalWork);
-
         $report->update([
                     'total_work' => $workTotal,
                     'average_work' => $averageTime,

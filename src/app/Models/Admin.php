@@ -42,6 +42,6 @@ class Admin extends Authenticatable
     ];
 
     public function applies(){
-        return $this->hasMany(Apply:class);
+        return $this->hasMany(Apply::class);
     }
 }

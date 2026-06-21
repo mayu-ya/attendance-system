@@ -80,8 +80,8 @@ class AttendanceTest extends TestCase
         $response->assertSee($year);
         $response->assertSee($day);
     }
-}
-public function test_sub_month()
+
+    public function test_sub_month()
     {
         $user = User::find(1);
         $attendance = AttendanceRecord::create([
@@ -134,3 +134,4 @@ public function test_sub_month()
 
         $response->assertSee($dayYm);
     }
+}
