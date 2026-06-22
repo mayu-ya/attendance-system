@@ -20,12 +20,8 @@ composer install
 cp .env.example .env
 ```
 ```
-# もし、Your lock file does not contain a compatible set of packages. Please run composer update.とエラーが出たときは以下を実行する。
-composer update laravel-lang/lang --no-plugins
-```
-```
-# .env
-# この箇所を変更(11~16行目付近)
+#.env
+#この箇所を変更(11~16行目付近)
 DB_CONNECTION = mysql
 DB_HOST = mysql
 DB_PORT = 3306
@@ -33,7 +29,7 @@ DB_DATABASE = laravel_db
 DB_USERNAME = laravel_user
 DB_PASSWORD = laravel_pass
 
-# パーミッションエラーで変更できない場合は、コンテナを抜けて以下を実行する
+#パーミッションエラーで変更できない場合は、コンテナを抜けて以下を実行する
 sudo chmod -R 777 src/.env
 ```
 ```
@@ -46,8 +42,8 @@ php artisan db:seed
 
 ## mailhogセットアップ
 ```
-# .env
-# 以下の箇所を修正する(31~38行目付近)
+#.env
+#以下の箇所を修正する(31~38行目付近)
 MAIL_MAILER=smtp
 MAIL_HOST=mailhog
 MAIL_PORT=1025
@@ -59,7 +55,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 ## 開発環境
-- ユーザー登録 : http://localhost/lohin
+- ユーザー登録 : http://localhost/login
 - ユーザー登録（管理者）: http://localhost/admin/login
 - phpMyadmin : http://localhost:8080
 - mailhog : http://localhost:8025
